@@ -1,9 +1,8 @@
-<app-header (typeButton)="setData($event)"></app-header>
+<app-header ></app-header>
 <div class="container">
   <div class="row">
     <div class="col-lg-12">
-      <app-recipes *ngIf="openComp==='recipes'"></app-recipes>
-      <app-shopping-list *ngIf="openComp==='shopping'"></app-shopping-list>
+      <router-outlet></router-outlet>     
     </div>
   </div>
 </div>

@@ -1,10 +1,10 @@
 <div class="row">
     <div class="col-lg-5">
-        <app-recipe-list></app-recipe-list>
+        <app-recipe-list ></app-recipe-list>
     </div>
     <div class="col-lg-7">
-       <app-recipe-detail *ngIf="haveRecipe else noRecipe" [takeRecipeToDetail]="recipe"  ></app-recipe-detail>
-       <ng-template #noRecipe><p>Select Recipe</p></ng-template>
+       <router-outlet></router-outlet>
+       
        
     </div>
 </div>

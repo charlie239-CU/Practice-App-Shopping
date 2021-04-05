@@ -3,15 +3,10 @@ import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
     selector: 'app-header',
-    templateUrl: './header.component.html'
+    templateUrl: './header.component.html',
+    styleUrls:['header.component.css']
 })
 
 export class HeaderComponent  {
-    @Output('typeButton') headerButton=new EventEmitter<string>()
-    constructor() { }
-
-    clickHeaderButton(type:string)
-    {
-        this.headerButton.emit(type)
-    }
+   
 }
