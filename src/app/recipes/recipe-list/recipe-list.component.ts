@@ -15,15 +15,7 @@ export class RecipeListComponent implements OnInit {
    ngOnInit(): void {
     this.recipes=this.recipeService.getRecipeCopy()
   }
-   passRecipeDetail(data:Recipe)
-   {
-     this.recipeService.recipeSelected.emit(data)
-     // console.log("from list:"+data)
-   }
-   getData(){
-    // console.log(this.recipes[0].name)
-     return this.recipes[0].name;
-   }
+
 
 
 }

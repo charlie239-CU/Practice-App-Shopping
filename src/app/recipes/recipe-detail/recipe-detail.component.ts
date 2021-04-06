@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ShoppingService } from 'src/app/shopping-list/shopping.service';
 import { Recipe } from '../recipe.model';
