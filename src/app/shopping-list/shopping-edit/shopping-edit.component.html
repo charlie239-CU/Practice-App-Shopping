@@ -1,29 +1,39 @@
 <div class="row">
     <div class="col-lg-12">
-        <form>
+        <form #f="ngForm" (ngSubmit)="setShoppingData()">
             <div class="row">
                 <div class="col-lg-5 form-group">
                     <label for="name">Name</label>
                     <input type="text"
                      id="name" 
                     class="form-control"
-                    #name
+                    name="name"
+                    ngModel required
+                    #name="ngModel"
                     >
+                    <span class="text-muted" *ngIf="!name.valid && name.touched">
+                        Please enter ingredient name</span>
                 </div>
                 <div class="col-lg-3 form-group">
                     <label for="amount">Amount</label>
                     <input type="number" 
                     class="form-control" 
                     id="amount"
-                    #amount
+                    name="amount"
+                    ngModel required
+                    #amount="ngModel"
+                    pattern="^[1-9]+[0-9]*$"
                     >
+                    <span class="text-muted " *ngIf="!amount.valid && amount.touched">
+                      invalid amount</span>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-12 ">
-                    <button class="btn btn-success ml-1" type="button" (click)="setShoppingData(name.value,amount.value)">Add</button>
-                    <button class="btn btn-danger ml-1" type="button">Delete</button>
-                    <button class="btn btn-info ml-1" type="button">Clear</button>
+                    <button class="btn btn-success ml-1" type="submit"
+                        [disabled]="!f.valid">{{ checkEditing?'update':'add' }}</button>
+                    <button class="btn btn-danger ml-1" *ngIf="checkEditing" type="button" (click)="delIngredient();checkEditing=false">Delete</button>
+                    <button class="btn btn-info ml-1" type="button" (click)="f.reset(); checkEditing=false">Clear</button>
                 </div>
             </div>
         </form>

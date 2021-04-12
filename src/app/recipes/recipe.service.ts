@@ -5,6 +5,7 @@ import { Recipe } from "./recipe.model";
 export class RecipeService{
 
     recipeSelected=new Subject<Recipe>()
+    recipeChanged=new Subject<Recipe[]>()
 
    recipes:Recipe[]
     constructor(){
@@ -35,5 +36,34 @@ export class RecipeService{
     getRecipeCopy()
     {
         return this.recipes.slice()
+    }
+
+    getRecipe(index:number)
+    {
+        return this.recipes[index]
+    }
+
+    addRecipe(recipe:Recipe)
+    {
+        this.recipes.push(recipe)
+        this.recipeChanged.next(this.recipes.slice());
+
+    }
+    updateRecipe(index:number,recipe:Recipe)
+    {
+        this.recipes[index]=recipe
+        this.recipeChanged.next(this.recipes.slice())
+    }
+    getLastId():number
+    {
+        
+        return +this.recipes.length-1
+        
+    }
+
+    delRecipe(index:number){
+        this.recipes.splice(index,1)
+        this.recipeChanged.next(this.recipes.slice())
+
     }
 }

@@ -15,6 +15,7 @@ import { AppRouteModule } from './app-routes.module';
 import { NoSelectedComponent } from './recipes/recipe-detail/no-selected/no-selected.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipeService } from './recipes/recipe.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,9 @@ import { RecipeService } from './recipes/recipe.service';
   imports: [
     BrowserModule,
     NgbModule,
-    AppRouteModule
+    AppRouteModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [ShoppingService,RecipeService],
   bootstrap: [AppComponent]

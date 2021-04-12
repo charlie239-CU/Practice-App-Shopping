@@ -13,7 +13,7 @@
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                 <a role="button" (click)="sendIngredient()" routerLink="/shopping" ngbDropdownItem>To Shopping list</a>
                 <a role="button" [routerLink]="['edit']" ngbDropdownItem>Edit Recipe</a>
-                <a role="button" ngbDropdownItem>Delete Recipe</a>
+                <a role="button" ngbDropdownItem (click)="removeRecipe()" >Delete Recipe</a>
             </div>
         </div>
     </div>

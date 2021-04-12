@@ -10,6 +10,7 @@ import { ShoppingService } from './shopping.service';
 })
 export class ShoppingListComponent implements OnInit {
   ingredients:Ingredient[]
+
   constructor(private shoppingService:ShoppingService) {
   }
   
@@ -18,6 +19,11 @@ export class ShoppingListComponent implements OnInit {
     this.shoppingService.ingredientChanged.subscribe((ingredient:Ingredient[])=>{
       this.ingredients=ingredient
     })
+  }
+  
+  setIndex(index:number)
+  {
+      this.shoppingService.startedEditing.next(index)
   }
 
 

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { Ingredient } from 'src/app/shared/ingredient.model';
 import { ShoppingService } from '../shopping.service';
 
@@ -8,18 +10,49 @@ import { ShoppingService } from '../shopping.service';
   styleUrls: ['./shopping-edit.component.css']
 })
 export class ShoppingEditComponent implements OnInit {
+
+  @ViewChild('f',{static:false}) formData:NgForm
+  fetchedData:Ingredient
+  susbcribe:Subscription
+  editingIndex:number;
+  editingIngredient:Ingredient
+  checkEditing:boolean=false;
  constructor(private shoppingService:ShoppingService){
 
  }
  num:number
   ngOnInit(): void {
+    this.susbcribe=this.shoppingService.startedEditing.subscribe(
+      (index:number)=>{
+        this.editingIndex=index;
+        this.checkEditing=true
+        this.editingIngredient=this.shoppingService.getIngredientByIndex(index)
+        this.formData.setValue({
+          'name':this.editingIngredient.name,
+          'amount':this.editingIngredient.amount,
+        })
+      }
+    )
   }
-  setShoppingData(name:string,amount:any)
+  setShoppingData()
   {
-    this.num=amount
-    const ingredient=new Ingredient(name,amount)
-    this.shoppingService.setIngredient(ingredient)
-    //console.log(name+amount)
+    this.fetchedData=this.formData.value;
+    if(this.checkEditing)
+    {
+      this.shoppingService.updateIngredient(this.editingIndex,this.fetchedData)
+        this.formData.reset()
+    }
+    else{
+      this.shoppingService.setIngredient(this.fetchedData)
+      this.formData.reset()
+    }
+    //console.log(this.fetchedData)
+    
+  }
+
+  delIngredient(){
+    this.shoppingService.deleteIngreident(this.editingIndex)
+    this.formData.reset()
   }
 
 
