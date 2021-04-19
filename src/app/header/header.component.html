@@ -12,8 +12,8 @@
                 <li  ngbDropdown  >
                     <a role="button" class="nav-link  "  id="dropdownBasic1" ngbDropdownToggle role="button"  >Manage <span class="caret"></span></a>
                     <ul ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                        <li ngbDropdownItem><a role="button" class="nav-link">save data</a></li>
-                        <li ngbDropdownItem><a role="button" class="nav-link">fetch data</a></li>
+                        <li ngbDropdownItem><a role="button" class="nav-link" (click)="saveData()">save data</a></li>
+                        <li ngbDropdownItem><a role="button" class="nav-link" (click)="fetchData()">fetch data</a></li>
                     </ul>
                 </li>
             </ul>
