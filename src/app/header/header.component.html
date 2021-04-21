@@ -5,12 +5,22 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav ">
-                <li class="nav-item "><a class="nav-link" routerLinkActive="active" role="button"  routerLink="/recipes" >Recipes</a></li>
-                <li class="nav-item"><a  class="nav-link " routerLinkActive="active" role="button"  routerLink="/shopping">shopping List</a></li>
+                <li class="nav-item "><a class="nav-link" routerLinkActive="active" role="button"
+                        routerLink="/recipes" *ngIf="isAuthenticated">Recipes</a></li>
+                <li class="nav-item "><a class="nav-link" routerLinkActive="active" role="button"
+                        routerLink="/auth" *ngIf="!isAuthenticated">Authentication</a></li>
+                <li class="nav-item"><a class="nav-link " routerLinkActive="active" role="button"
+                        routerLink="/shopping">shopping List</a></li>
             </ul>
             <ul class="nav navbar-nav ml-auto">
-                <li  ngbDropdown  >
-                    <a role="button" class="nav-link  "  id="dropdownBasic1" ngbDropdownToggle role="button"  >Manage <span class="caret"></span></a>
+                <li>
+                    <a role="button" class="nav-link" (click)="onLogout()"*ngIf="isAuthenticated">Logout</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav " *ngIf="isAuthenticated">
+                <li ngbDropdown>
+                    <a role="button" class="nav-link  " id="dropdownBasic1" ngbDropdownToggle role="button">Manage <span
+                            class="caret"></span></a>
                     <ul ngbDropdownMenu aria-labelledby="dropdownBasic1">
                         <li ngbDropdownItem><a role="button" class="nav-link" (click)="saveData()">save data</a></li>
                         <li ngbDropdownItem><a role="button" class="nav-link" (click)="fetchData()">fetch data</a></li>
@@ -18,6 +28,6 @@
                 </li>
             </ul>
         </div>
-      
+
     </div>
 </nav>

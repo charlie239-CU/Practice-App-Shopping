@@ -19,6 +19,9 @@ import { NoSelectedComponent } from './recipes/recipe-detail/no-selected/no-sele
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipeService } from './recipes/recipe.service';
 import { LoggingInterceptorService } from './shared/logging-interceptor.service';
+import { AuthComponent } from './auth/auth.component';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { AuthInterceptor } from './auth/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -33,6 +36,8 @@ import { LoggingInterceptorService } from './shared/logging-interceptor.service'
     DropdownDirective,
     NoSelectedComponent,
     RecipeEditComponent,
+    AuthComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,9 +47,10 @@ import { LoggingInterceptorService } from './shared/logging-interceptor.service'
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [ShoppingService,RecipeService,{
+  providers: [ShoppingService,RecipeService,
+  {
     provide:HTTP_INTERCEPTORS,
-    useClass:LoggingInterceptorService,
+    useClass:AuthInterceptor,
     multi:true
   }],
   

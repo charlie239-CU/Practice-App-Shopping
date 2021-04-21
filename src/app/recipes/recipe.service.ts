@@ -74,6 +74,7 @@ export class RecipeService{
 
     setRecipes(fetchedRecipes:Recipe[]){
         this.recipes=fetchedRecipes
+       // console.log(fetchedRecipes)
         this.recipeChanged.next(this.recipes)
     }
 }
