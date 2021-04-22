@@ -12,7 +12,7 @@ import { AuthService,AuthResponseData } from './authService.service';
 })
 export class AuthComponent implements OnInit {
   switchButton=true;//true=signIn false=signup
-  getError=""
+  getError="error"
   isError:boolean=false 
   isLoading=false
   constructor(private authService:AuthService,
@@ -59,5 +59,9 @@ export class AuthComponent implements OnInit {
 
     authData.reset();
 
+  }
+
+  alertButton(){
+    this.isError=false
   }
 }

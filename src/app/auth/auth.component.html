@@ -1,8 +1,6 @@
 <div class="row">
     <div class="col-lg-5 offset-lg-3">
-        <div  class="alert alert-danger" *ngIf="isError" >
-                <p>{{getError}}</p>
-        </div>
+        <app-alert [message]="getError" *ngIf="isError" (close)="alertButton()"></app-alert>
         <div *ngIf="isLoading" style="text-align: center;">
             <app-loading-spinner></app-loading-spinner>
         </div>

@@ -1,35 +1,19 @@
 import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
-import { AppComponent } from "./app.component";
-import { AuthGuardService } from "./auth/auth-guard";
+import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
 import { AuthComponent } from "./auth/auth.component";
-import { NoSelectedComponent } from "./recipes/recipe-detail/no-selected/no-selected.component";
-import { RecipeDetailComponent } from "./recipes/recipe-detail/recipe-detail.component";
-import { RecipeEditComponent } from "./recipes/recipe-edit/recipe-edit.component";
-import { RecipeListComponent } from "./recipes/recipe-list/recipe-list.component";
-import { RecipeResolverService } from "./recipes/recipe-resolver.service";
-import { RecipesComponent } from "./recipes/recipes.component";
-import { ShoppingListComponent } from "./shopping-list/shopping-list.component";
+import { RecipeRoutingModule } from "./recipes/recipe-routing.module";
 
 const routes:Routes=[
+    { path:'auth',loadChildren:()=>import('./auth/auth.module').then(m=>m.AuthModule) },
     { path:'',redirectTo:'/recipes',pathMatch:'full' },
-    {path:'recipes',component:RecipesComponent,
-    canActivate:[AuthGuardService]
-    ,children:[
-        { path:'',component:NoSelectedComponent},
-        { path:'new',component:RecipeEditComponent },
-        { path:'recipe-list',component:RecipeListComponent },
-        { path:':id',component:RecipeDetailComponent,resolve:[RecipeResolverService]},
-        { path:':id/edit',component:RecipeEditComponent,resolve:[RecipeResolverService] }
-       
-    ]},
-    {path:'shopping',component:ShoppingListComponent},
-    { path:'auth',component:AuthComponent }
+    { path:'recipes',loadChildren:()=>import('./recipes/recipes.module').then(m=>m.RecipeModule) },
+    { path:'shopping',loadChildren:()=>import('./shopping-list/shopping.module').then(m=>m.ShoppingModule) }
 ];
 
 @NgModule({
     imports:[
-        RouterModule.forRoot(routes)
+        RouterModule.forRoot(routes,{preloadingStrategy:PreloadAllModules}),
+        
     ],
     exports:[RouterModule]
 })
